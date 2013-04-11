@@ -1,7 +1,7 @@
 requests_nzgovtmbie
 =============
 
-This package allows for authentication to the NZ Govternment MBIE BusinessData services using the requests library.
+This package allows for authentication to the NZ Government MBIE BusinessData services using the requests library.
 It is an example of HMAC based authenication being used to access protected REST end points.
 
 Usage
