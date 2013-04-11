@@ -26,7 +26,7 @@ running::
 Requirements
 ------------
 
-- requests_
+- requests
 
 
 Authors
