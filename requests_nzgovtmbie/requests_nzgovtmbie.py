@@ -7,7 +7,7 @@ from datetime import datetime
 class HttpNzgovtmbieAuth(AuthBase):
     """Authentication Handler for Requests to connect to NZ Government MBIE data services
 
-    NB: URLencoding must have been applied to the get string otherwise you will get a 
+    NB: URLencoding must have been applied to the get string params otherwise you will get a 
     401 "Invalid message Signature error"""
 
     def __init__(self, key, secret):
@@ -67,12 +67,25 @@ class HttpNzgovtmbieAuth(AuthBase):
         hh['Host'] = host
         return hh
 
-    def __call__(self,r, format="json"):
+    def format_from_header(self, r, default):
+        fh = r.headers.get("Accept")
+        jsonh = fh.find('json')
+        xmlh = fh.find('xml')
+        if jsonh > 0 and xmlh > 0:
+            raise Exception("Ambigious format request in header")
+        if jsonh > 0:
+            return 'json'
+        if xmlh > 0:
+            return 'xml'
+        return default
+
+    def __call__(self,r,format="json"):
         authheader = {}
         method = 'GET'
         host = self.cleanhost(r.full_url, r.path_url)
         url = r.path_url
         timestamp=  self.httpdate()
+        format = self.format_from_header(r,format)
         accept = self.format_accept(format)
         #also need to set http accept accordingly
         accept_header = self.accept_header(format)
@@ -83,10 +96,11 @@ class HttpNzgovtmbieAuth(AuthBase):
         # and the date header
         date_header =self.date_header(timestamp)
         r.headers.update(date_header) 
-        paramarr = [method, host, uri, timestamp, self.key, accept,''] #last string just to get trailing \n
+        paramarr = [method, host, url, timestamp, self.key, accept,''] #last string just to get trailing \n
         message = '\n'.join(paramarr)
         hashedmessage = self.hmac(message)
         auth_header_value = ':'.join([self.key, hashedmessage])
         authheader['Authorization'] = auth_header_value
         r.headers.update(authheader) 
         return r
+
