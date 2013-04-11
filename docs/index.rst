@@ -2,7 +2,7 @@ requests_nzgovtmbie
 =============
 
 This package allows for authentication to the NZ Govternment MBIE BusinessData services using the requests library.
-It is an example of HMAC based authenication being used in accessing protected REST end points.
+It is an example of HMAC based authenication being used to access protected REST end points.
 
 Usage
 -----
@@ -13,7 +13,7 @@ Usage
 
     import requests
     from requests_nzgovtmbie import HttpNzgovtmbieAuth
-    r = requests.get("http://www.businessdata.govt.nz/data/app/ws/rest/companies/role/search/v1.0/acme", auth=HttpNzgovtmbieAuth("key", "secret)"")
+    r = requests.get("http://eat.businessdata.govt.nz/data/app/ws/rest/companies/role/search/v1.0/acme", auth=HttpNzgovtmbieAuth("key", "secret)"")
 
 Installation
 ------------
