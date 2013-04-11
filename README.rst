@@ -13,7 +13,7 @@ Usage
 
     import requests
     from requests_nzgovtmbie import HttpNzgovtmbieAuth
-    r = requests.get("http://eat.businessdata.govt.nz/data/app/ws/rest/companies/role/search/v1.0/acme", auth=HttpNzgovtmbieAuth("key", "secret)"")
+    r = requests.get("http://eat.businessdata.govt.nz/data/app/ws/rest/companies/role/search/v1.0/acme", auth=HttpNzgovtmbieAuth("key", "secret"))
 
 Installation
 ------------
