@@ -14,7 +14,6 @@ Usage
     import requests
     from requests_nzgovtmbie import HttpNzgovtmbieAuth
     r = requests.get("http://www.businessdata.govt.nz/data/app/ws/rest/companies/role/search/v1.0/acme", auth=HttpNzgovtmbieAuth("key", "secret)"")
-    requests.get("http://ntlm_protected_site.com",auth=HttpNtlmAuth('domain\\username','password'))
 
 Installation
 ------------
@@ -28,10 +27,7 @@ Requirements
 ------------
 
 - requests_
-- python-ntlm_
 
-.. _requests: https://github.com/kennethreitz/requests/
-.. _python-ntlm: http://code.google.com/p/python-ntlm/
 
 Authors
 -------
