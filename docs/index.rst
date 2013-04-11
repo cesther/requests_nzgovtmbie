@@ -1,18 +1,19 @@
 requests_nzgovtmbie
 =============
 
-This package allows for HTTP NTLM authentication using the requests library.
+This package allows for authentication to the NZ Govternment MBIE BusinessData services using the requests library.
+It is an example of HMAC based authenication being used in accessing protected REST end points.
 
 Usage
 -----
 
-``HttpNtlmAuth`` extends requests ``AuthBase``, so usage is simple:
+``HttpNzgovtmbieAuth`` extends requests ``AuthBase``, so usage is simple:
 
 .. code:: python
 
     import requests
-    from requests_nzgovtmbie import HttpNtlmAuth
-
+    from requests_nzgovtmbie import HttpNzgovtmbieAuth
+    r = requests.get("http://www.businessdata.govt.nz/data/app/ws/rest/companies/role/search/v1.0/acme", auth=HttpNzgovtmbieAuth("key", "secret)"")
     requests.get("http://ntlm_protected_site.com",auth=HttpNtlmAuth('domain\\username','password'))
 
 Installation
