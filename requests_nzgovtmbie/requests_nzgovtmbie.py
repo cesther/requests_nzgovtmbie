@@ -6,7 +6,7 @@ from datetime import datetime
 
 class HttpNzgovtmbieAuth(AuthBase):
     """Authentication Handler for Requests to connect to NZ Government MBIE data services
-    
+
     NB: URLencoding must have been applied to the get string otherwise you will get a 
     401 "Invalid message Signature error"""
 
@@ -20,7 +20,7 @@ class HttpNzgovtmbieAuth(AuthBase):
         return sig_text
 
     def cleanhost(self, fullpath, uripath):
-        #NB fullpath & uripath both contain fullpath when a proxy is used
+        #NB fullpath & uripath both appear to contain fullpath when a proxy is used between requests and REST service
         #if this becomes an issue - might need to rewrite this func
         hostarr = fullpath.split(uripath)
         if hostarr and len(hostarr) == 2:
@@ -54,11 +54,7 @@ class HttpNzgovtmbieAuth(AuthBase):
 
     def accept_header(self, format):
         ah = {}
-        if format == "json":
-            accept = "application/json"
-        else: # output xml
-            accept = "application/xml"
-        ah['Accept']=accept
+        ah['Accept']=self.format_accept(format)
         return ah
 
     def date_header(self, datestr):
