@@ -13,8 +13,10 @@ Usage
 .. code:: python
 
     import requests
+    k = "key" # key & secret provided by MBIE
+    s = "secret"
     from requests_nzgovtmbie import HttpNzgovtmbieAuth
-    r = requests.get("http://eat.businessdata.govt.nz/data/app/ws/rest/companies/role/search/v1.0/acme", auth=HttpNzgovtmbieAuth("key", "secret"))
+    r = requests.get("http://eat.businessdata.govt.nz/data/app/ws/rest/companies/role/search/v1.0/acme", auth=HttpNzgovtmbieAuth(k, s))
 
     headers = {'Accept': 'application/xml'}
     r = requests.get("http://eat.businessdata.govt.nz/data/app/ws/rest/companies/role/search/v1.0/jones bob", headers=headers, auth=HttpNzgovtmbieAuth(k, s))
