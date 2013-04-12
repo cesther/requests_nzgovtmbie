@@ -8,12 +8,17 @@ Usage
 -----
 
 ``HttpNzgovtmbieAuth`` extends requests ``AuthBase``, so usage is simple:
-
+    DEfault output is json, to output xml set via the Headers, see 2nd example below:
+    
 .. code:: python
 
     import requests
     from requests_nzgovtmbie import HttpNzgovtmbieAuth
     r = requests.get("http://eat.businessdata.govt.nz/data/app/ws/rest/companies/role/search/v1.0/acme", auth=HttpNzgovtmbieAuth("key", "secret"))
+
+    headers = {'Accept': 'application/xml'}
+    r = requests.get("http://eat.businessdata.govt.nz/data/app/ws/rest/companies/role/search/v1.0/jones bob", headers=headers, auth=HttpNzgovtmbieAuth(k, s))
+
 
 Installation
 ------------

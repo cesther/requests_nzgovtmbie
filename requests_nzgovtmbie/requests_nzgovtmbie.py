@@ -74,10 +74,12 @@ class HttpNzgovtmbieAuth(AuthBase):
         if jsonh > 0 and xmlh > 0:
             raise Exception("Ambigious format request in header")
         if jsonh > 0:
-            return 'json'
-        if xmlh > 0:
-            return 'xml'
-        return default
+            format = 'json'
+        elif xmlh > 0:
+            format = 'xml'
+        else:
+            format = default
+        return format
 
     def __call__(self,r,format="json"):
         authheader = {}
